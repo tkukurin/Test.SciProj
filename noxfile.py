@@ -9,6 +9,15 @@ DIR = Path(__file__).parent.resolve()
 
 nox.options.sessions = ["lint", "pylint", "tests"]
 
+conda_sess = lambda **kw: nox.session(
+    venv_backend="conda",
+    # does not work with environment yml
+    venv_params=["--file", "conda_environment.txt"],
+    # don't reinstall the environment, not very fast
+    reuse_venv=True,
+    **kw
+)
+
 
 @nox.session
 def lint(session: nox.Session) -> None:
@@ -20,6 +29,7 @@ def lint(session: nox.Session) -> None:
 
 
 @nox.session
+@conda_sess(name="pylint_conda")
 def pylint(session: nox.Session) -> None:
     """
     Run PyLint.
@@ -27,6 +37,9 @@ def pylint(session: nox.Session) -> None:
     # This needs to be installed into the package environment, and is slower
     # than a pre-commit check
     session.install(".", "pylint")
+    """Run PyLint."""
+    session.install("-e", ".", "--no-deps")
+    session.install("pylint")
     session.run("pylint", "src", *session.posargs)
 
 
