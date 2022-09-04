@@ -7,51 +7,48 @@ build-backend = "hatchling.build"
 name = "tk_sciproj_test"
 version = "0.1.0"
 authors = [
-    { name = "Toni Kukurin", email = "tkukurin@gmail.com" },
+  { name = "Toni Kukurin", email = "tkukurin@gmail.com" },
 ]
 maintainers = [
-    { name = "Toni Kukurin", email = "tkukurin@gmail.com" },
+  { name = "Toni Kukurin", email = "tkukurin@gmail.com" },
 ]
 
 description = "A great sci package."
 readme = "README.md"
 
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 
 classifiers = [
-    "License :: OSI Approved :: BSD License",
-    "Topic :: Scientific/Engineering",
-    "Intended Audience :: Science/Research",
-    "Intended Audience :: Developers",
-    "Operating System :: OS Independent",
-    "License :: OSI Approved :: BSD License",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Development Status :: 1 - Planning",
+  "Topic :: Scientific/Engineering",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Development Status :: 1 - Planning",
 ]
 
 dependencies = [
-    "typing_extensions >=3.7; python_version<'3.8'",
+  "typing_extensions >=3.7",
 ]
 
 [project.optional-dependencies]
 test = [
-    "pytest >=6",
-    "pytest-cov >=3",
+  "pytest >=6",
+  "pytest-cov >=3",
 ]
 dev = [
-    "pytest >=6",
-    "pytest-cov >=3",
+  "pytest >=6",
+  "pytest-cov >=3",
 ]
 docs = [
-    "Sphinx>=4.0",
-    "myst_parser>=0.13",
-    "sphinx-book-theme>=0.1.0",
-    "sphinx_copybutton",
+  "Sphinx>=4.0",
+  "myst_parser>=0.13",
+  "sphinx-book-theme>=0.1.0",
+  "sphinx_copybutton",
 ]
 
 [project.urls]
@@ -71,7 +68,7 @@ addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
 xfail_strict = true
 filterwarnings = ["error"]
 testpaths = [
-    "tests",
+  "tests",
 ]
 
 
@@ -90,7 +87,7 @@ profile = "black"
 
 
 [tool.pylint]
-master.py-version = "3.7"
+master.py-version = "3.9"
 master.ignore-paths= ["src/tk_sciproj_test/_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
