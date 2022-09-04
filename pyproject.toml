@@ -1,23 +1,19 @@
 [build-system]
-requires = ["hatchling>=0.7"]
-build-backend = "hatchling.build"
+requires = ["poetry_core>=0.7"]
+build-backend = "poetry.core.masonry.api"
 
 
-[project]
+[tool.poetry]
 name = "tk_sciproj_test"
 version = "0.1.0"
 authors = [
-  { name = "Toni Kukurin", email = "tkukurin@gmail.com" },
+  "Toni Kukurin, <tkukurin@gmail.com>",
 ]
 maintainers = [
-  { name = "Toni Kukurin", email = "tkukurin@gmail.com" },
+  "Toni Kukurin, <tkukurin@gmail.com>",
 ]
-
 description = "A great sci package."
 readme = "README.md"
-
-requires-python = ">=3.9"
-
 classifiers = [
   "Topic :: Scientific/Engineering",
   "Intended Audience :: Science/Research",
@@ -31,34 +27,29 @@ classifiers = [
   "Development Status :: 1 - Planning",
 ]
 
-dependencies = [
-  "typing_extensions >=3.7",
-]
+[tool.poetry.dependencies]
+python = ">=3.9,<4"
+typing_extensions = { version = ">=3.7" }
 
-[project.optional-dependencies]
-test = [
-  "pytest >=6",
-  "pytest-cov >=3",
-]
-dev = [
-  "pytest >=6",
-  "pytest-cov >=3",
-]
+pytest = { version = ">=6", optional = true }
+pytest-cov = { version = ">=3", optional = true }
+sphinx = { version = "^4.0", optional = true }
+sphinx_book_theme = { version = ">=0.1.0", optional = true }
+sphinx_copybutton = { version = ">=0.3.0", optional = true }
+pytesseract = "^0.3.10"
+requests = "^2.28.1"
+
+[tool.poetry.dev-dependencies]
+pytest = ">= 6"
+pytest-cov = ">= 3"
+
+[tool.poetry.extras]
+test = ["pytest", "pytest-cov"]
+dev = ["pytest", "pytest-cov"]
 docs = [
-  "Sphinx>=4.0",
-  "myst_parser>=0.13",
-  "sphinx-book-theme>=0.1.0",
-  "sphinx_copybutton",
-]
-
-[project.urls]
-homepage = "https://github.com/tkukurin/tk-sciproj-test"
-
-
-[tool.hatch.envs.default]
-dependencies = [
-  "pytest",
-  "pytest-cov",
+    "sphinx",
+    "sphinx-book-theme",
+    "sphinx_copybutton",
 ]
 
 
@@ -74,7 +65,7 @@ testpaths = [
 
 [tool.mypy]
 files = "src"
-python_version = "3.7"
+python_version = "3.9"
 warn_unused_configs = true
 strict = true
 show_error_codes = true

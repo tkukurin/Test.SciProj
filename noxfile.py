@@ -24,11 +24,19 @@ def lint(session: nox.Session) -> None:
     """
     Run the linter.
     """
+    """Run the linter."""
     session.install("pre-commit")
     session.run("pre-commit", "run", "--all-files", *session.posargs)
 
 
 @nox.session
+@conda_sess()
+def poetry(session: nox.Session) -> None:
+    """Add a new dependency."""
+    session.install("poetry")  # nox -s poetry -- add requests
+    session.run("poetry", *session.posargs)
+
+
 @conda_sess(name="pylint_conda")
 def pylint(session: nox.Session) -> None:
     """
