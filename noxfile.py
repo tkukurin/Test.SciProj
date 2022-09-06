@@ -15,21 +15,17 @@ conda_sess = lambda **kw: nox.session(
     venv_params=["--file", "conda_environment.txt"],
     # don't reinstall the environment, not very fast
     reuse_venv=True,
-    **kw
+    **kw,
 )
 
 
-@nox.session
+@conda_sess(name="lint_conda")
 def lint(session: nox.Session) -> None:
-    """
-    Run the linter.
-    """
     """Run the linter."""
     session.install("pre-commit")
     session.run("pre-commit", "run", "--all-files", *session.posargs)
 
 
-@nox.session
 @conda_sess()
 def poetry(session: nox.Session) -> None:
     """Add a new dependency."""
@@ -39,12 +35,6 @@ def poetry(session: nox.Session) -> None:
 
 @conda_sess(name="pylint_conda")
 def pylint(session: nox.Session) -> None:
-    """
-    Run PyLint.
-    """
-    # This needs to be installed into the package environment, and is slower
-    # than a pre-commit check
-    session.install(".", "pylint")
     """Run PyLint."""
     session.install("-e", ".", "--no-deps")
     session.install("pylint")
@@ -99,4 +89,6 @@ def build(session: nox.Session) -> None:
         shutil.rmtree(build_p)
 
     session.install("build")
+    session.install("conda")
+    session.run("conda", "env", "create", "-f", "environment.yml")
     session.run("python", "-m", "build")
