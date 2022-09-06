@@ -13,8 +13,8 @@
 Generated using `cookiecutter gh:scikit-hep/cookie`.
 
 <!-- prettier-ignore-start -->
-[actions-badge]:            https://github.com/tkukurin/tk-sciproj-test/workflows/CI/badge.svg
-[actions-link]:             https://github.com/tkukurin/tk-sciproj-test/actions
+[actions-badge]:            https://github.com/tkukurin/Test.SciProj/workflows/CI/badge.svg
+[actions-link]:             https://github.com/tkukurin/Test.SciProj/actions
 [conda-badge]:              https://img.shields.io/conda/vn/conda-forge/tk-sciproj-test
 [conda-link]:               https://github.com/conda-forge/tk-sciproj-test-feedstock
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
