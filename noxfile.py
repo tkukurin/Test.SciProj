@@ -9,7 +9,7 @@ DIR = Path(__file__).parent.resolve()
 
 nox.options.sessions = ["lint", "pylint", "tests"]
 
-conda_sess = lambda **kw: nox.session(
+sess = lambda **kw: nox.session(
     venv_backend="conda",
     # does not work with environment yml
     venv_params=["--file", "conda_environment.txt"],
@@ -19,21 +19,21 @@ conda_sess = lambda **kw: nox.session(
 )
 
 
-@conda_sess(name="lint_conda")
+@sess()
 def lint(session: nox.Session) -> None:
     """Run the linter."""
     session.install("pre-commit")
     session.run("pre-commit", "run", "--all-files", *session.posargs)
 
 
-@conda_sess()
+@sess()
 def poetry(session: nox.Session) -> None:
     """Add a new dependency."""
     session.install("poetry")  # nox -s poetry -- add requests
     session.run("poetry", *session.posargs)
 
 
-@conda_sess(name="pylint_conda")
+@sess()
 def pylint(session: nox.Session) -> None:
     """Run PyLint."""
     session.install("-e", ".", "--no-deps")
@@ -41,7 +41,7 @@ def pylint(session: nox.Session) -> None:
     session.run("pylint", "src", *session.posargs)
 
 
-@nox.session
+@sess()
 def tests(session: nox.Session) -> None:
     """
     Run the unit and regular tests.
@@ -50,7 +50,7 @@ def tests(session: nox.Session) -> None:
     session.run("pytest", *session.posargs)
 
 
-@nox.session
+@sess()
 def coverage(session: nox.Session) -> None:
     """
     Run tests and compute coverage.
@@ -60,7 +60,7 @@ def coverage(session: nox.Session) -> None:
     tests(session)
 
 
-@nox.session
+@sess()
 def docs(session: nox.Session) -> None:
     """
     Build the docs. Pass "serve" to serve.
@@ -78,7 +78,7 @@ def docs(session: nox.Session) -> None:
             session.warn("Unsupported argument to docs")
 
 
-@nox.session
+@sess()
 def build(session: nox.Session) -> None:
     """
     Build an SDist and wheel.
